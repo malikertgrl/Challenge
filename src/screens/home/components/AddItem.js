@@ -3,14 +3,14 @@ import React from 'react'
 import { Layout, Colors } from '../../../constants'
 import Icon from "./Icon"
 
-const AddItem = () => {
+const AddItem = ({ onPress }) => {
     return (
         <View style={styles.addButton}>
             <Icon
                 name={"add"}
                 size={35}
                 color={Colors.white}
-                onPress={() => console.log("tılasn")}
+                onPress={onPress}
 
             />
         </View>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         height: 60,
         borderRadius: 30,
         position: "absolute",
-        marginTop: Layout.windowHeight - 100,
+        marginTop: Layout.windowHeight - 150,
         marginLeft: Layout.windowWidth / 2 - 30
     }
 })

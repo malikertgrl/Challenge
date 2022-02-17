@@ -4,9 +4,10 @@ import RenderItem from "./components/RenderItem"
 import Seperator from "./components/Seperator"
 import api from "../../api"
 import AddItem from './components/AddItem'
+import { NavigationContainer } from '@react-navigation/native'
 
 
-const Home = () => {
+const Home = ({ navigation }) => {
     const [data, setData] = useState({});
 
     const getItem = () => {
@@ -34,13 +35,17 @@ const Home = () => {
                 data={data}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) =>
-                    <RenderItem item={item} onPress={() => console.log("tıklandı")} />
+                    <RenderItem
+                        item={item}
+                        onPress={() => navigation.navigate("Details", { id: item.id })} />
                 }
 
             />
 
 
-            <AddItem />
+            <AddItem
+                onPress={() => navigation.navigate("AddCharacter")}
+            />
 
 
         </View>

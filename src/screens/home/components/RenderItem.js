@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     },
     ImageStyle: {
         resizeMode: "contain",
-        height: Layout.windowHeight / 9 - 15,
-        width: Layout.windowWidth / 5 - 15
+        height: Layout.windowHeight / 9 - 25,
+        width: Layout.windowWidth / 5 - 25
     }
 })
