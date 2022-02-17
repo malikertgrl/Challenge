@@ -4,11 +4,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 
 
-const Icon = ({ name, size, color, onPress }) => {
+const Icon = ({ name, size, color, iconPress }) => {
     return (
 
         <View>
-            <TouchableOpacity onPress={onPress}>
+            <TouchableOpacity onPress={iconPress}>
                 <MaterialIcons name={name} size={size} color={color} />
             </TouchableOpacity>
         </View>

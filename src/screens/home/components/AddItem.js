@@ -3,14 +3,14 @@ import React from 'react'
 import { Layout, Colors } from '../../../constants'
 import Icon from "./Icon"
 
-const AddItem = ({ onPress }) => {
+const AddItem = ({ iconPress }) => {
     return (
         <View style={styles.addButton}>
             <Icon
                 name={"add"}
                 size={35}
                 color={Colors.white}
-                onPress={onPress}
+                iconPress={iconPress}
 
             />
         </View>

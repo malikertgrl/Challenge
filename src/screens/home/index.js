@@ -4,11 +4,17 @@ import RenderItem from "./components/RenderItem"
 import Seperator from "./components/Seperator"
 import api from "../../api"
 import AddItem from './components/AddItem'
-import { NavigationContainer } from '@react-navigation/native'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 
 const Home = ({ navigation }) => {
     const [data, setData] = useState({});
+
+    const deleteItem = (id) => {
+        // console.log("sileceğiz", item)
+        const newData = data.filter(item => item.id != id)
+        setData(newData)
+    }
 
     const getItem = () => {
         api.
@@ -29,7 +35,7 @@ const Home = ({ navigation }) => {
     }, [])
 
     return (
-        <View>
+        <View style={{ backgroundColor: Colors.white }}>
             <FlatList
                 ItemSeparatorComponent={() => <Seperator />}
                 data={data}
@@ -37,14 +43,17 @@ const Home = ({ navigation }) => {
                 renderItem={({ item }) =>
                     <RenderItem
                         item={item}
-                        onPress={() => navigation.navigate("Details", { id: item.id })} />
+                        onPress={() => navigation.navigate("Details", { id: item.id })}
+                        iconPress={() => deleteItem(item.id)}
+
+                    />
                 }
 
             />
 
 
             <AddItem
-                onPress={() => navigation.navigate("AddCharacter")}
+                iconPress={() => navigation.navigate("AddCharacter")}
             />
 
 

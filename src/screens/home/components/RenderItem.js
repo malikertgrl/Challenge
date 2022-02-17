@@ -3,7 +3,7 @@ import React from 'react'
 import { Layout, Colors } from '../../../constants'
 import Icon from "./Icon"
 
-const RenderItem = ({ item, onPress }) => {
+const RenderItem = ({ item, onPress, iconPress }) => {
 
 
     return (
@@ -26,7 +26,7 @@ const RenderItem = ({ item, onPress }) => {
             <Icon
                 name={"delete"}
                 size={35}
-                onPress={() => console.log(item.name, "sil")}
+                iconPress={iconPress}
             />
         </View>
 
