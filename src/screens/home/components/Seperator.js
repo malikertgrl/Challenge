@@ -13,7 +13,8 @@ export default Seperator
 
 const styles = StyleSheet.create({
     SeperatorStyle: {
+        // elevation: 2,
         borderBottomWidth: 1,
-        borderBottomColor: "#0005"
+        borderBottomColor: "#0001"
     }
 })

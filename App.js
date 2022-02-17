@@ -3,7 +3,7 @@ import React from 'react'
 import Home from "./src/screens/home"
 const App = () => {
   return (
-    <View>
+    <View >
       {/* <Text>sdasdas</Text> */}
       <Home />
     </View>

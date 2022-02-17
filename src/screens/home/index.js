@@ -28,18 +28,16 @@ const Home = () => {
     }, [])
 
     return (
-        <View >
-            <View style={{}}>
-                <FlatList
-                    ItemSeparatorComponent={() => <Seperator />}
-                    data={data}
-                    keyExtractor={item => item.id}
-                    renderItem={({ item }) =>
-                        <RenderItem item={item} onPress={() => console.log("tıklandı")} />
-                    }
+        <View>
+            <FlatList
+                ItemSeparatorComponent={() => <Seperator />}
+                data={data}
+                keyExtractor={item => item.id}
+                renderItem={({ item }) =>
+                    <RenderItem item={item} onPress={() => console.log("tıklandı")} />
+                }
 
-                />
-            </View>
+            />
 
 
             <AddItem />

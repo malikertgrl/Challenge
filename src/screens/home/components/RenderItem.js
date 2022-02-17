@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Layout } from '../../../constants'
+import { Layout, Colors } from '../../../constants'
+import Icon from "./Icon"
 
 const RenderItem = ({ item, onPress }) => {
-    // const width = Layout.windowWidth
-    // const height = Layout.windowHeight
+
 
     return (
         <View style={styles.container}>
@@ -18,18 +18,16 @@ const RenderItem = ({ item, onPress }) => {
                     />
                     <View style={styles.textStyle}>
                         <Text> {item.name}</Text>
-
                     </View>
 
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity>
-                <Text>
-                    ıcon
-                </Text>
-            </TouchableOpacity>
 
-
+            <Icon
+                name={"delete"}
+                size={35}
+                onPress={() => console.log(item.name, "sil")}
+            />
         </View>
 
     )

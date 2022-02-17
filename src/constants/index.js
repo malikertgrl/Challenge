@@ -1,2 +1,4 @@
 import Layout from "./Layout"
-export { Layout }
+import Colors from "./Colors"
+
+export { Layout, Colors }
