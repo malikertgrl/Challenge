@@ -5,7 +5,6 @@ import CustomButton from "./components/CustomButton"
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const AddCharacter = ({ navigation, route }) => {
-    console.log(route.params)
     const [character, setCharacter] = useState({
         name: "",
         job: "",
