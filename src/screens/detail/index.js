@@ -5,10 +5,15 @@ import { Layout, Colors } from '../../constants'
 
 const Details = ({ route }) => {
     const [character, setCharacter] = useState({})
+    const [item, setItem] = useState({})
+
     useEffect(() => {
         showDetails();
+        setItem(route.params.item)
+
     }, [])
 
+    // id endpointine göre servise istek atıp karakter detaylarını alır.
     const showDetails = () => {
         api
             .characterDetails(route.params.id)
@@ -23,13 +28,30 @@ const Details = ({ route }) => {
     }
 
     return (
+        console.log("item ne geliyor", item) ||
         <View style={styles.container}>
-            <Image
-                style={styles.imageStyle}
-                source={{ uri: character.avatar }}
-            />
-            <Text style={styles.text}>{character.name} </Text>
-            <Text>Job:  {character.job} </Text>
+            {/* {character ?
+                <View>
+                    <Image
+                        style={styles.imageStyle}
+                        source={{ uri: character.avatar }}
+                    />
+                    <Text style={styles.text}>{character.name} </Text>
+                    <Text>{character.job} </Text>
+                </View>
+                : */}
+
+            <View>
+                <Image
+                    style={styles.imageStyle}
+                    source={{ uri: item.avatar }}
+                />
+                <Text style={styles.text}>{item.name} </Text>
+                <Text>{item.job}</Text>
+            </View>
+
+
+            {/* } */}
 
         </View>
     )

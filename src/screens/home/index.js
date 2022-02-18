@@ -11,20 +11,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Home = ({ navigation }) => {
     const [data, setData] = useState({});
 
-
+    // listemizden eleman siler
     const deleteItem = (id) => {
-        // console.log("sileceğiz", item)
         const newData = data.filter(item => item.id != id)
         setData(newData)
         AsyncStorage.setItem("data", JSON.stringify(newData))
     }
 
-    const getItem = async () => {
+    //sayfa ilk açıldığında storageda data yoksa api request ile datayı çeker
+    //storage da data varsa gösterir.
+    const getList = async () => {
         console.log("data", data)
         const itemList = await AsyncStorage.getItem("data")
         if (itemList) {
-            const parse = JSON.parse(itemList)
-            setData(parse);
+            const parseList = JSON.parse(itemList)
+            setData(parseList);
         } else {
             api.
                 allCharacters().then(async (response) => {
@@ -42,27 +43,9 @@ const Home = ({ navigation }) => {
 
     }
 
-    // const setStorage = async () => {
-    //     await AsyncStorage.setItem("data", JSON.stringify(data))
-    //     console.log("setStorage çalıştı")
-    // }
-
-    // const getStorage = async () => {
-    //     console.log("getstorage")
-    //     try {
-    //         const getData = await AsyncStorage.getItem("data")
-    //         console.log("storageda ne geliyor", getData)
-    //         if (getData != null) {
-    //             const parse = JSON.parse(getData)
-    //             setData(parse);
-    //         }
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
 
     useEffect(() => {
-        getItem();
+        getList();
     }, [])
 
     return (
@@ -74,13 +57,14 @@ const Home = ({ navigation }) => {
                 renderItem={({ item }) =>
                     <RenderItem
                         item={item}
-                        onPress={() => navigation.navigate("Details", { id: item.id })}
+                        onPress={() => navigation.navigate("Details", { id: item.id, item: item })}
                         iconPress={() => deleteItem(item.id)}
 
                     />
                 }
 
             />
+            {/* eleman ekleme componenti */}
             <AddItem
                 iconPress={() => navigation.navigate("AddCharacter", { setData })}
             />

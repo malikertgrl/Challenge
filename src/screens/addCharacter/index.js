@@ -12,16 +12,18 @@ const AddCharacter = ({ navigation, route }) => {
         job: "",
         about: "",
         id: Math.random(),
-        image: ""
+        avatar: ""
     })
 
+    // inputtaki değişimi alır.
     const changeText = (key, value) => {
         setCharacter(data => ({ ...data, [key]: value }))
     }
+
+    //karakteri kaydeder.
     const saveCharacter = () => {
         console.log("character", character)
         navigation.goBack()
-        // setCharacter("")
         AsyncStorage.getItem("data").then(data => {
             const characterList = JSON.parse(data)
             characterList.push(character)
