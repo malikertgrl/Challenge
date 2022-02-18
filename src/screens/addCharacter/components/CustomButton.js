@@ -2,9 +2,9 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Colors } from "../../../constants"
 
-const CustomButton = () => {
+const CustomButton = ({ onPress }) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
             <View style={styles.button}>
                 <Text style={styles.text}>Add Character</Text>
             </View>

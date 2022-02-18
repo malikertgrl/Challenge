@@ -4,31 +4,62 @@ import RenderItem from "./components/RenderItem"
 import Seperator from "./components/Seperator"
 import api from "../../api"
 import AddItem from './components/AddItem'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
+import { Colors } from "../../constants"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Home = ({ navigation }) => {
     const [data, setData] = useState({});
 
+
     const deleteItem = (id) => {
         // console.log("sileceğiz", item)
         const newData = data.filter(item => item.id != id)
         setData(newData)
+        AsyncStorage.setItem("data", JSON.stringify(newData))
     }
 
-    const getItem = () => {
-        api.
-            allCharacters().then(response => {
-                if (response) {
-                    setData(response)
-                } else {
-                    console.log("allCharacters error")
+    const getItem = async () => {
+        console.log("data", data)
+        const itemList = await AsyncStorage.getItem("data")
+        if (itemList) {
+            const parse = JSON.parse(itemList)
+            setData(parse);
+        } else {
+            api.
+                allCharacters().then(async (response) => {
+                    if (response) {
+                        await AsyncStorage.setItem("data", JSON.stringify(response))
+                        setData(response)
+                    } else {
+                        console.log("allCharacters error")
+                    }
+
                 }
-            }
-            )
-            .catch(e => console.log(e))
+                )
+                .catch(e => console.log(e))
+        }
 
     }
+
+    // const setStorage = async () => {
+    //     await AsyncStorage.setItem("data", JSON.stringify(data))
+    //     console.log("setStorage çalıştı")
+    // }
+
+    // const getStorage = async () => {
+    //     console.log("getstorage")
+    //     try {
+    //         const getData = await AsyncStorage.getItem("data")
+    //         console.log("storageda ne geliyor", getData)
+    //         if (getData != null) {
+    //             const parse = JSON.parse(getData)
+    //             setData(parse);
+    //         }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     useEffect(() => {
         getItem();
@@ -50,13 +81,9 @@ const Home = ({ navigation }) => {
                 }
 
             />
-
-
             <AddItem
-                iconPress={() => navigation.navigate("AddCharacter")}
+                iconPress={() => navigation.navigate("AddCharacter", { setData })}
             />
-
-
         </View>
     )
 }
