@@ -1,10 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { View } from 'react-native'
 import React, { useState } from 'react'
 import Input from "./components/Input"
 import CustomButton from "./components/CustomButton"
-import { NavigationContainer } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { Images } from '../../constants'
 
 const AddCharacter = ({ navigation, route }) => {
     console.log(route.params)
@@ -16,12 +14,12 @@ const AddCharacter = ({ navigation, route }) => {
         avatar: ""
     })
 
-    // inputtaki değişimi alır.
+    // Retrieves the change in the input.
     const changeText = (key, value) => {
         setCharacter(data => ({ ...data, [key]: value }))
     }
 
-    //karakteri kaydeder.
+    //saves the character.
     const saveCharacter = () => {
         console.log("character", character)
         navigation.goBack()
@@ -69,5 +67,3 @@ const AddCharacter = ({ navigation, route }) => {
 }
 
 export default AddCharacter
-
-const styles = StyleSheet.create({})

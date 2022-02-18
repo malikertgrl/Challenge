@@ -11,15 +11,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Home = ({ navigation }) => {
     const [data, setData] = useState({});
 
-    // listemizden eleman siler
+    // deletes the selected element
     const deleteItem = (id) => {
         const newData = data.filter(item => item.id != id)
         setData(newData)
         AsyncStorage.setItem("data", JSON.stringify(newData))
     }
 
-    //sayfa ilk açıldığında storageda data yoksa api request ile datayı çeker
-    //storage da data varsa gösterir.
+    //When the page is first opened, if there is no data in the storage, it will pull the data with api request.
+    //Shows if there is data in the storage..
     const getList = async () => {
         console.log("data", data)
         const itemList = await AsyncStorage.getItem("data")
@@ -64,7 +64,7 @@ const Home = ({ navigation }) => {
                 }
 
             />
-            {/* eleman ekleme componenti */}
+            {/* add element component */}
             <AddItem
                 iconPress={() => navigation.navigate("AddCharacter", { setData })}
             />

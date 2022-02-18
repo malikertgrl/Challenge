@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import api from "../../api"
 import { Layout, Colors } from '../../constants'
 
@@ -13,7 +13,7 @@ const Details = ({ route }) => {
 
     }, [])
 
-    // id endpointine göre servise istek atıp karakter detaylarını alır.
+    // According to the id endpoint, it sends a request to the service and gets the character details.
     const showDetails = () => {
         api
             .characterDetails(route.params.id)
@@ -28,16 +28,19 @@ const Details = ({ route }) => {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView>
+            <View style={styles.container}>
 
-            <Image
-                style={styles.imageStyle}
-                source={{ uri: item.avatar }}
-            />
-            <Text style={styles.text}>{item.name} </Text>
-            <Text>{item.job}</Text>
-            <Text>{item.about}</Text>
-        </View>
+                <Image
+                    style={styles.imageStyle}
+                    source={{ uri: item.avatar }}
+                />
+                <Text style={styles.text}>{item.name} </Text>
+                <Text>{item.job}</Text>
+                <Text>{item.about && item.about}</Text>
+            </View>
+        </ScrollView>
+
     )
 }
 

@@ -5,7 +5,6 @@ import Icon from "./Icon"
 
 const RenderItem = ({ item, onPress, iconPress }) => {
 
-    // console.log(Images.found)
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={onPress}>
@@ -14,8 +13,6 @@ const RenderItem = ({ item, onPress, iconPress }) => {
                         style={styles.ImageStyle}
                         source={{
                             uri: item.avatar
-                            // ? item.avatar :
-                            //     "https://aeroclub-issoire.fr/wp-content/uploads/2020/05/image-not-found-300x225.jpg"
                         }}
                     />
                     <View style={styles.textStyle}>

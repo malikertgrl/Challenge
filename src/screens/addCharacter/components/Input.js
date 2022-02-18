@@ -1,7 +1,12 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 import { Colors } from "../../../constants"
-const Input = ({ onChangeText, value, title, placeholder, style }) => {
+const Input = ({
+    onChangeText,
+    value,
+    title,
+    placeholder,
+    style }) => {
     return (
         <View style={{ margin: 10 }}>
             <Text style={styles.text}>{title}</Text>
