@@ -4,6 +4,7 @@ import Input from "./components/Input"
 import CustomButton from "./components/CustomButton"
 import { NavigationContainer } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Images } from '../../constants'
 
 const AddCharacter = ({ navigation, route }) => {
     console.log(route.params)
@@ -31,6 +32,7 @@ const AddCharacter = ({ navigation, route }) => {
             route.params.setData(characterList)
         })
 
+
     }
 
     return (
@@ -55,8 +57,8 @@ const AddCharacter = ({ navigation, route }) => {
 
             <Input
                 title="Image Link:"
-                value={character.image}
-                onChangeText={text => changeText("image", text)}
+                value={character.avatar}
+                onChangeText={text => changeText("avatar", text)}
 
             />
 

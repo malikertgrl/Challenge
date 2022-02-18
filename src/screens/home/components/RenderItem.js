@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Layout, Colors } from '../../../constants'
+import { Layout, Colors, Images } from '../../../constants'
 import Icon from "./Icon"
 
 const RenderItem = ({ item, onPress, iconPress }) => {
 
-
+    // console.log(Images.found)
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={onPress}>
@@ -13,7 +13,9 @@ const RenderItem = ({ item, onPress, iconPress }) => {
                     <Image
                         style={styles.ImageStyle}
                         source={{
-                            uri: item.avatar,
+                            uri: item.avatar
+                            // ? item.avatar :
+                            //     "https://aeroclub-issoire.fr/wp-content/uploads/2020/05/image-not-found-300x225.jpg"
                         }}
                     />
                     <View style={styles.textStyle}>

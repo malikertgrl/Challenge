@@ -28,31 +28,15 @@ const Details = ({ route }) => {
     }
 
     return (
-        console.log("item ne geliyor", item) ||
         <View style={styles.container}>
-            {/* {character ?
-                <View>
-                    <Image
-                        style={styles.imageStyle}
-                        source={{ uri: character.avatar }}
-                    />
-                    <Text style={styles.text}>{character.name} </Text>
-                    <Text>{character.job} </Text>
-                </View>
-                : */}
 
-            <View>
-                <Image
-                    style={styles.imageStyle}
-                    source={{ uri: item.avatar }}
-                />
-                <Text style={styles.text}>{item.name} </Text>
-                <Text>{item.job}</Text>
-            </View>
-
-
-            {/* } */}
-
+            <Image
+                style={styles.imageStyle}
+                source={{ uri: item.avatar }}
+            />
+            <Text style={styles.text}>{item.name} </Text>
+            <Text>{item.job}</Text>
+            <Text>{item.about}</Text>
         </View>
     )
 }
@@ -71,6 +55,6 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 25,
-        color: Colors.black
+        color: Colors.black,
     }
 })
