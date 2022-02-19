@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { View, FlatList, Alert } from 'react-native'
 import RenderItem from "./components/RenderItem"
 import Seperator from "./components/Seperator"
 import api from "../../api"
 import AddItem from './components/AddItem'
-import { Colors } from "../../constants"
+import { Colors, Layout } from "../../constants"
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { deleteItem } from "./utils/deleteItem"
+import Spinner from "../../components/Spinner"
 
 
 const Home = ({ navigation }) => {
+    const [isload, setIsLoad] = useState(false)
     const [data, setData] = useState({});
+    const totalHeight = Layout.windowHeight
 
-
-
+    const loading = (val) => {
+        setIsLoad(val)
+    }
     // deletes the selected element
     const handleDeleteItem = (id) => {
         const newData = deleteItem(id, data)
@@ -27,15 +31,19 @@ const Home = ({ navigation }) => {
         console.log("data", data)
         const itemList = await AsyncStorage.getItem("data")
         if (itemList) {
+            loading(false)
             const parseList = JSON.parse(itemList)
             setData(parseList);
         } else {
+
             api.
                 allCharacters().then(async (response) => {
                     if (response) {
+                        loading(false)
                         await AsyncStorage.setItem("data", JSON.stringify(response))
                         setData(response)
                     } else {
+                        Alert.alert("Alert", "Karakterler yüklenemedi uygulamayı kapatıp tekrar açar mısınız?")
                         console.log("allCharacters error")
                     }
 
@@ -49,28 +57,41 @@ const Home = ({ navigation }) => {
 
     useEffect(() => {
         getList();
+        loading(true)
     }, [])
 
     return (
-        <View style={{ backgroundColor: Colors.white }}>
-            <FlatList
-                ItemSeparatorComponent={() => <Seperator />}
-                data={data}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) =>
-                    <RenderItem
-                        item={item}
-                        onPress={() => navigation.navigate("Details", { id: item.id, item: item })}
-                        iconPress={() => handleDeleteItem(item.id)}
+        <View >
+
+            {isload ?
+                <View style={{ marginTop: totalHeight / 2 - 15 }}>
+                    <Spinner />
+
+                </View>
+                :
+                <View>
+                    <FlatList
+                        ItemSeparatorComponent={() => <Seperator />}
+                        data={data}
+                        keyExtractor={item => item.id}
+                        renderItem={({ item }) =>
+                            <RenderItem
+                                item={item}
+                                onPress={() => navigation.navigate("Details", { item: item })}
+                                iconPress={() => handleDeleteItem(item.id)}
+
+                            />
+                        }
 
                     />
-                }
+                    {/* add element component */}
+                    <AddItem
+                        iconPress={() => navigation.navigate("AddCharacter", { setData })}
+                    />
 
-            />
-            {/* add element component */}
-            <AddItem
-                iconPress={() => navigation.navigate("AddCharacter", { setData })}
-            />
+                </View>}
+
+
         </View>
     )
 }

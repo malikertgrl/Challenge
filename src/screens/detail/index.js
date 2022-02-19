@@ -1,43 +1,66 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView, Alert } from 'react-native'
 import api from "../../api"
 import { Layout, Colors } from '../../constants'
+import Spinner from "../../components/Spinner"
+
 
 const Details = ({ route }) => {
+    const [isload, setIsLoad] = useState(false)
     const [character, setCharacter] = useState({})
-    const [item, setItem] = useState({})
-
+    const item = route?.params?.item
     useEffect(() => {
         showDetails();
-        setItem(route.params.item)
-
+        loading(true)
     }, [])
+
+    const loading = (val) => {
+        setIsLoad(val)
+    }
 
     // According to the id endpoint, it sends a request to the service and gets the character details.
     const showDetails = () => {
-        api
-            .characterDetails(route.params.id)
-            .then(response => {
-                if (response) {
-                    setCharacter(response)
-                } else {
-                    console.log("characterDetails")
-                }
-            })
-            .catch((e) => console.log(e))
+        if (item.isManuel) {
+            loading(false)
+            setCharacter(item)
+        } else {
+            api
+                .characterDetails(item.id)
+                .then(response => {
+                    loading(false)
+
+                    if (response) {
+                        setCharacter(response)
+                    } else {
+                        Alert.alert("Alert", "Bir sorun oluştu. Lütfen tekrar deneyiniz.")
+                        console.log("characterDetails")
+                    }
+                })
+                .catch((e) => console.log(e))
+        }
+
     }
 
     return (
         <ScrollView>
             <View style={styles.container}>
+                {isload ?
+                    <View style={styles.spinner}>
+                        <Spinner />
 
-                <Image
-                    style={styles.imageStyle}
-                    source={{ uri: item.avatar }}
-                />
-                <Text style={styles.text}>{item.name} </Text>
-                <Text>{item.job}</Text>
-                <Text>{item.about && item.about}</Text>
+                    </View>
+                    :
+                    <View>
+                        <Image
+                            style={styles.imageStyle}
+                            source={{ uri: character.avatar }}
+                        />
+                        <Text style={styles.text}>{character.name} </Text>
+                        <Text>{character.job}</Text>
+                        <Text style={styles.aboutStyle}>{character.about && character.about}</Text>
+                    </View>
+                }
+
             </View>
         </ScrollView>
 
@@ -59,5 +82,11 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 25,
         color: Colors.black,
-    }
+    },
+    aboutStyle: {
+        marginHorizontal: 18,
+        marginVertical: 15
+
+    },
+    spinner: { marginTop: Layout.windowHeight / 2 + 15 }
 })

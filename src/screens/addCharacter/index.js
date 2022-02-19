@@ -10,7 +10,8 @@ const AddCharacter = ({ navigation, route }) => {
         job: "",
         about: "",
         id: Math.random(),
-        avatar: ""
+        avatar: "",
+        isManuel: true
     })
 
     // Retrieves the change in the input.
