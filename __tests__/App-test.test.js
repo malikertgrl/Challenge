@@ -8,18 +8,17 @@ import AddCharacter from "../src/screens/addCharacter"
 import { deleteItem } from "../src/screens/home/utils/deleteItem"
 
 
-test('renders correctly', () => {
+test('renders seperator', () => {
   const tree = renderer.create(<Seperator />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-
-test('renders correctly', () => {
+test('renders customButton', () => {
   const tree = renderer.create(<CustomButton />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-test('renders correctly', () => {
+test('renders Input', () => {
   const tree = renderer.create(<Input />).toJSON();
   expect(tree).toMatchSnapshot();
 });

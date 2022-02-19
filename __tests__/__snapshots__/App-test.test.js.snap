@@ -1,5 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders Input 1`] = `
+<View
+  style={
+    Object {
+      "margin": 10,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#000",
+      }
+    }
+  />
+  <TextInput
+    multiline={true}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": 5,
+          "elevation": 2,
+          "height": 45,
+          "marginVertical": 5,
+        },
+        Object {},
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`renders Input 2`] = `
+<View
+  style={
+    Object {
+      "margin": 10,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#000",
+      }
+    }
+  />
+  <TextInput
+    multiline={true}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": 5,
+          "elevation": 2,
+          "height": 45,
+          "marginVertical": 5,
+        },
+        Object {},
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`renders Input 3`] = `
+<ActivityIndicator
+  size="large"
+/>
+`;
+
 exports[`renders correctly 1`] = `
 <View
   style={
@@ -85,4 +157,58 @@ exports[`renders correctly 3`] = `
     }
   />
 </View>
+`;
+
+exports[`renders customButton 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#1e88e5",
+        "borderRadius": 5,
+        "height": 45,
+        "justifyContent": "center",
+        "margin": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#fff",
+        }
+      }
+    >
+      Add Character
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders seperator 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#0001",
+      "borderBottomWidth": 1,
+    }
+  }
+/>
 `;

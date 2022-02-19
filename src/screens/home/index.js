@@ -28,7 +28,6 @@ const Home = ({ navigation }) => {
     //When the page is first opened, if there is no data in the storage, it will pull the data with api request.
     //Shows if there is data in the storage..
     const getList = async () => {
-        console.log("data", data)
         const itemList = await AsyncStorage.getItem("data")
         if (itemList) {
             loading(false)
@@ -51,9 +50,7 @@ const Home = ({ navigation }) => {
                 )
                 .catch(e => console.log(e))
         }
-
     }
-
 
     useEffect(() => {
         getList();

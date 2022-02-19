@@ -11,7 +11,6 @@ const Details = ({ route }) => {
     const item = route?.params?.item
     useEffect(() => {
         showDetails();
-        loading(true)
     }, [])
 
     const loading = (val) => {
@@ -24,6 +23,7 @@ const Details = ({ route }) => {
             loading(false)
             setCharacter(item)
         } else {
+            loading(true)
             api
                 .characterDetails(item.id)
                 .then(response => {
@@ -43,14 +43,14 @@ const Details = ({ route }) => {
 
     return (
         <ScrollView>
-            <View style={styles.container}>
+            <View >
                 {isload ?
                     <View style={styles.spinner}>
                         <Spinner />
 
                     </View>
                     :
-                    <View>
+                    <View style={styles.container}>
                         <Image
                             style={styles.imageStyle}
                             source={{ uri: character.avatar }}
