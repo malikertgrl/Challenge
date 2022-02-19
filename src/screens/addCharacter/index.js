@@ -35,17 +35,20 @@ const AddCharacter = ({ navigation, route }) => {
     return (
         <View>
             <Input
+                testID="name"
                 title="Name Surname:"
                 value={character.name}
                 onChangeText={text => changeText("name", text)}
             />
             <Input
+                testID="job"
                 title="Job Title:"
                 value={character.job}
                 onChangeText={text => changeText("job", text)}
 
             />
             <Input
+                testID="about"
                 title="About Him/Her:"
                 value={character.about}
                 style={{ height: 80 }}
@@ -53,6 +56,7 @@ const AddCharacter = ({ navigation, route }) => {
             />
 
             <Input
+                testID="avatar"
                 title="Image Link:"
                 value={character.avatar}
                 onChangeText={text => changeText("avatar", text)}

@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 import { Colors } from "../../../constants"
 const Input = ({
+    testID,
     onChangeText,
     value,
     title,
@@ -11,6 +12,7 @@ const Input = ({
         <View style={{ margin: 10 }}>
             <Text style={styles.text}>{title}</Text>
             <TextInput
+                testID={testID}
                 style={[styles.inputStyle, { ...style }]}
                 value={value}
                 onChangeText={onChangeText}

@@ -8,12 +8,15 @@ import { Colors } from "../../constants"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+
 const Home = ({ navigation }) => {
     const [data, setData] = useState({});
 
+
+
     // deletes the selected element
-    const deleteItem = (id) => {
-        const newData = data.filter(item => item.id != id)
+    const handleDeleteItem = (id) => {
+        const newData = deleteItem(id, data)
         setData(newData)
         AsyncStorage.setItem("data", JSON.stringify(newData))
     }
@@ -58,7 +61,7 @@ const Home = ({ navigation }) => {
                     <RenderItem
                         item={item}
                         onPress={() => navigation.navigate("Details", { id: item.id, item: item })}
-                        iconPress={() => deleteItem(item.id)}
+                        iconPress={() => handleDeleteItem(item.id)}
 
                     />
                 }
@@ -75,4 +78,3 @@ const Home = ({ navigation }) => {
 
 export default Home
 
-const styles = StyleSheet.create({})
