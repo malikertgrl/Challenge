@@ -6,6 +6,9 @@ import CustomButton from "../src/screens/AddCharacter/components/CustomButton"
 import Input from "../src/screens/AddCharacter/components/Input"
 import AddCharacter from "../src/screens/addCharacter"
 import { deleteItem } from "../src/screens/home/utils/deleteItem"
+import Icon from "../src/screens/home/components/Icon"
+import AddItem from "../src/screens/home/components/AddItem"
+
 
 
 test('renders seperator', () => {
@@ -23,6 +26,20 @@ test('renders Input', () => {
   expect(tree).toMatchSnapshot();
 });
 
+test('renders Icon', () => {
+  const tree = renderer.create(<Icon />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+test('renders AddItem', () => {
+  const tree = renderer.create(<AddItem />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+// test('renders RenderItem', () => {
+//   const tree = renderer.create(<RenderItem />).toJSON();
+//   expect(tree).toMatchSnapshot();
+// });
 
 describe("Controlling text inputs", () => {
 
