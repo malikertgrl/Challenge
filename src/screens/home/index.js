@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { View, FlatList, Alert } from 'react-native'
+import { View, FlatList, Alert, SafeAreaView } from 'react-native'
 import RenderItem from "./components/RenderItem"
 import Seperator from "./components/Seperator"
 import api from "../../api"
 import AddItem from './components/AddItem'
 import { Colors, Layout } from "../../constants"
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { deleteItem } from "./utils/deleteItem"
 import Spinner from "../../components/Spinner"
 import { useSelector, useDispatch } from 'react-redux'
 import { setLoading, setAllCharacters, removeCharacter } from '../../redux/action'
@@ -15,17 +14,7 @@ import { setLoading, setAllCharacters, removeCharacter } from '../../redux/actio
 const Home = ({ navigation }) => {
     const { allCharacters, loading } = useSelector(state => state.SystemReducer)
     const dispatch = useDispatch()
-
     const totalHeight = Layout.windowHeight
-
-
-
-    // deletes the selected element
-    // const handleDeleteItem = async (id) => {
-    //     dispatch(removeCharacter(id))
-
-    // }
-
 
 
     //When the page is first opened, if there is no data in the storage, it will pull the data with api request.
@@ -68,7 +57,7 @@ const Home = ({ navigation }) => {
     }, [allCharacters])
 
     return (
-        <View >
+        <View style={{ alignItems: "center" }}>
 
             {loading ?
                 <View style={{ marginTop: totalHeight / 2 - 15 }}>
@@ -76,7 +65,7 @@ const Home = ({ navigation }) => {
 
                 </View>
                 :
-                <View>
+                <SafeAreaView style={{ backgroundColor: Colors.white, width: Layout.windowWidth, height: Layout.windowHeight * 3 / 4 }}>
                     <FlatList
                         ItemSeparatorComponent={() => <Seperator />}
                         data={allCharacters}
@@ -89,14 +78,12 @@ const Home = ({ navigation }) => {
 
                             />
                         }
-
                     />
-                    {/* add element component */}
-                    <AddItem
-                        iconPress={() => navigation.navigate("AddCharacter")}
-                    />
-
-                </View>}
+                </SafeAreaView>}
+            {/* add element component */}
+            <AddItem
+                iconPress={() => navigation.navigate("AddCharacter")}
+            />
 
 
         </View>

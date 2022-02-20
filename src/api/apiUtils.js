@@ -1,6 +1,5 @@
 export const ApiUtils = {
     checkStatus: function (response) {
-        // console.log("apu response", response)
         if (response.ok) {
             return response;
         } else {

@@ -1,11 +1,10 @@
 import {
-    ADD_TO_CHARACTER,
     REMOVE_FROM_CHARACTER,
     SET_LOADİNG,
     PULL_ALL_CHARACTERS
 } from "./actionTypes"
 
-
+//add to characters
 export const setAllCharacters = (item) => (dispatch) => {
     dispatch({
         type: PULL_ALL_CHARACTERS,
@@ -13,21 +12,14 @@ export const setAllCharacters = (item) => (dispatch) => {
     });
 }
 
-
-export const addCharacter = (item) => (dispatch) => {
-    dispatch({
-        type: ADD_TO_CHARACTER,
-        payload: item
-    });
-}
-//loader kapatır
+//remove from characters
 export const removeCharacter = (item) => (dispatch) => {
     dispatch({
         type: REMOVE_FROM_CHARACTER,
         payload: item
     });
 }
-// Spinner'ı açar kapatır
+// sets spinner 
 export const setLoading = (val) => (dispatch) => {
     dispatch({
         type: SET_LOADİNG,

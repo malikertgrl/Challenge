@@ -13,6 +13,7 @@ const Details = ({ route }) => {
     const dispatch = useDispatch()
     const [character, setCharacter] = useState({})
     const item = route?.params?.item
+
     useEffect(() => {
         showDetails();
     }, [])
