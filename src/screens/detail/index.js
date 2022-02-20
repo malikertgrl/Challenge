@@ -3,31 +3,31 @@ import { StyleSheet, Text, View, Image, ScrollView, Alert } from 'react-native'
 import api from "../../api"
 import { Layout, Colors } from '../../constants'
 import Spinner from "../../components/Spinner"
+import { useSelector, useDispatch } from 'react-redux'
+import { setLoading } from '../../redux/action'
+
 
 
 const Details = ({ route }) => {
-    const [isload, setIsLoad] = useState(false)
+    const { characterList, loading } = useSelector(state => state.SystemReducer)
+    const dispatch = useDispatch()
     const [character, setCharacter] = useState({})
     const item = route?.params?.item
     useEffect(() => {
         showDetails();
     }, [])
 
-    const loading = (val) => {
-        setIsLoad(val)
-    }
 
     // According to the id endpoint, it sends a request to the service and gets the character details.
     const showDetails = () => {
         if (item.isManuel) {
-            loading(false)
             setCharacter(item)
         } else {
-            loading(true)
+            dispatch(setLoading(true))
             api
                 .characterDetails(item.id)
                 .then(response => {
-                    loading(false)
+                    dispatch(setLoading(false))
 
                     if (response) {
                         setCharacter(response)
@@ -44,7 +44,7 @@ const Details = ({ route }) => {
     return (
         <ScrollView>
             <View >
-                {isload ?
+                {loading ?
                     <View style={styles.spinner}>
                         <Spinner />
 

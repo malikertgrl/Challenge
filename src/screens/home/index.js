@@ -8,41 +8,46 @@ import { Colors, Layout } from "../../constants"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { deleteItem } from "./utils/deleteItem"
 import Spinner from "../../components/Spinner"
+import { useSelector, useDispatch } from 'react-redux'
+import { setLoading, setAllCharacters, removeCharacter } from '../../redux/action'
 
 
 const Home = ({ navigation }) => {
-    const [isload, setIsLoad] = useState(false)
-    const [data, setData] = useState({});
+    const { allCharacters, loading } = useSelector(state => state.SystemReducer)
+    const dispatch = useDispatch()
+
     const totalHeight = Layout.windowHeight
 
-    const loading = (val) => {
-        setIsLoad(val)
-    }
+
+
     // deletes the selected element
-    const handleDeleteItem = (id) => {
-        const newData = deleteItem(id, data)
-        setData(newData)
-        AsyncStorage.setItem("data", JSON.stringify(newData))
-    }
+    // const handleDeleteItem = async (id) => {
+    //     dispatch(removeCharacter(id))
+
+    // }
+
+
 
     //When the page is first opened, if there is no data in the storage, it will pull the data with api request.
     //Shows if there is data in the storage..
     const getList = async () => {
         const itemList = await AsyncStorage.getItem("data")
+        console.log("gösterilen karakterler", itemList)
         if (itemList) {
-            loading(false)
+            dispatch(setLoading(false))
             const parseList = JSON.parse(itemList)
-            setData(parseList);
-        } else {
+            dispatch(setAllCharacters(parseList))
 
+        } else {
             api.
                 allCharacters().then(async (response) => {
                     if (response) {
-                        loading(false)
+                        dispatch(setLoading(false))
                         await AsyncStorage.setItem("data", JSON.stringify(response))
-                        setData(response)
+                        dispatch(setAllCharacters(response))
+
                     } else {
-                        Alert.alert("Alert", "Karakterler yüklenemedi uygulamayı kapatıp tekrar açar mısınız?")
+                        Alert.alert("Alert", "Karakterler yüklenemedi uygulamayı kapatıp tekrar açınız")
                         console.log("allCharacters error")
                     }
 
@@ -54,13 +59,18 @@ const Home = ({ navigation }) => {
 
     useEffect(() => {
         getList();
-        loading(true)
+        dispatch(setLoading(true))
     }, [])
+
+    useEffect(() => {
+        console.log("length", allCharacters.length)
+        AsyncStorage.setItem("data", JSON.stringify(allCharacters))
+    }, [allCharacters])
 
     return (
         <View >
 
-            {isload ?
+            {loading ?
                 <View style={{ marginTop: totalHeight / 2 - 15 }}>
                     <Spinner />
 
@@ -69,13 +79,13 @@ const Home = ({ navigation }) => {
                 <View>
                     <FlatList
                         ItemSeparatorComponent={() => <Seperator />}
-                        data={data}
+                        data={allCharacters}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) =>
                             <RenderItem
                                 item={item}
                                 onPress={() => navigation.navigate("Details", { item: item })}
-                                iconPress={() => handleDeleteItem(item.id)}
+                                iconPress={() => dispatch(removeCharacter(item.id))}
 
                             />
                         }
@@ -83,7 +93,7 @@ const Home = ({ navigation }) => {
                     />
                     {/* add element component */}
                     <AddItem
-                        iconPress={() => navigation.navigate("AddCharacter", { setData })}
+                        iconPress={() => navigation.navigate("AddCharacter")}
                     />
 
                 </View>}

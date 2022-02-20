@@ -1,13 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Home from "./src/screens/home"
 import Router from './src/navigation/Router'
-import Spinner from "./src/components/Spinner"
+import { Provider } from "react-redux";
+import { Store } from "./src/redux/Store";
 
-const App = () => <Router />
+const App = () => {
+    return (
+        <Provider store={Store} >
+            <Router />
+        </Provider>
+    )
+}
 
 
 
 export default App
-
-const styles = StyleSheet.create({})

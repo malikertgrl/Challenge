@@ -1,10 +1,14 @@
-import { View } from 'react-native'
+import { Alert, View } from 'react-native'
 import React, { useState } from 'react'
 import Input from "./components/Input"
 import CustomButton from "./components/CustomButton"
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useSelector, useDispatch } from 'react-redux'
+import { setAllCharacters } from '../../redux/action'
 
 const AddCharacter = ({ navigation, route }) => {
+    const dispatch = useDispatch()
+
     const [character, setCharacter] = useState({
         name: "",
         job: "",
@@ -21,14 +25,19 @@ const AddCharacter = ({ navigation, route }) => {
 
     //saves the character.
     const saveCharacter = () => {
-        console.log("character", character)
-        navigation.goBack()
-        AsyncStorage.getItem("data").then(data => {
-            const characterList = JSON.parse(data)
-            characterList.push(character)
-            AsyncStorage.setItem("data", JSON.stringify(characterList))
-            route.params.setData(characterList)
-        })
+        if (Object.values(character).indexOf('') > -1) {
+            Alert.alert("Alert", "Lütfen karakterin tüm bilgilerini girdiğinizden emin olun!")
+        } else {
+            console.log("character", character)
+            navigation.goBack()
+            AsyncStorage.getItem("data").then(data => {
+                const characterList = JSON.parse(data)
+                characterList.push(character)
+                AsyncStorage.setItem("data", JSON.stringify(characterList))
+                dispatch(setAllCharacters(characterList))
+            })
+        }
+
 
 
     }
