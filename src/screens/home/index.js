@@ -21,7 +21,6 @@ const Home = ({ navigation }) => {
     //Shows if there is data in the storage..
     const getList = async () => {
         const itemList = await AsyncStorage.getItem("data")
-        console.log("gösterilen karakterler", itemList)
         if (itemList) {
             dispatch(setLoading(false))
             const parseList = JSON.parse(itemList)
@@ -52,7 +51,6 @@ const Home = ({ navigation }) => {
     }, [])
 
     useEffect(() => {
-        console.log("length", allCharacters.length)
         AsyncStorage.setItem("data", JSON.stringify(allCharacters))
     }, [allCharacters])
 
