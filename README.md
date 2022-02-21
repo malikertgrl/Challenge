@@ -9,32 +9,25 @@
 
 ## About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+We list the members of the simpson family in the project and we can add new members to the family
 
 ## Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+To run the project on your device, you can first install it for the windows device from the link I gave https://reactnative.dev/. Then let me choose an IDE for you. You can clone my project from my https://github.com/malikertgrl/Challenge github account
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
+You will need Node, the React Native command line interface, a JDK, and Android Studio.
 
-Give examples
+While you can use any editor of your choice to develop your app, you will need to install Android Studio in order to set up the necessary tooling to build your React Native app for Android.
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-Give the example
-
-And repeat
-
-until finished
-
-End with an example of getting some data out of the system or using it for a little demo.
+Then let me choose an IDE for you. You can clone my project from my https://github.com/malikertgrl/Challenge github account
 
 ## Usage <a name = "usage"></a>
 
-Add notes about how to use the system.
+You will see the simpsons family characters on the list screen.
+You can click on the Character to see the Character Details.
+Click the delete icon to delete the character.
+You can click the + button on the homepage to add a new character.
